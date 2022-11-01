@@ -1,3 +1,4 @@
+import { involeBooksAPI } from './../store/books.action';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectBooks } from '../store/books.selector';
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   books$ = this.store.select(selectBooks);
 
   ngOnInit(): void {
+    this.store.dispatch(involeBooksAPI())
   }
 
 }
