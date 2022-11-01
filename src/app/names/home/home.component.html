@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>All names</h1>
+  <div class="col container" *ngFor="let name of names$ | async">
+    <span>{{name.id}}</span>&nbsp;:&nbsp;
+    <span>{{name.name}}</span>
+  </div>
+</div>
