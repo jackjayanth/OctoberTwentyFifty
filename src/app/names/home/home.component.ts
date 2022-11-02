@@ -2,6 +2,7 @@ import { Name } from './../store/name';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { getNames } from '../store/names.selector';
+import { getNamesAPI } from '../store/names.action';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.names$)
+    this.store.dispatch(getNamesAPI())
   }
 
 }

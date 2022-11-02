@@ -25,7 +25,16 @@
     }
   ],
   "names": [{
-    "id": 1,
-    "name": "Jay"
-  }]
+      "id": 1,
+      "name": "Jay"
+    },
+    {
+      "id": 2,
+      "name": "Lauren"
+    },
+    {
+      "id": 3,
+      "name": "Madhuri"
+    }
+  ]
 }
