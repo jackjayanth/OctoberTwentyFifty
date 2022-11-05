@@ -6,7 +6,7 @@ import {
   Name
 } from './name';
 import {
-  getNamesSuccess
+  getNamesSuccess, saveNameSuccess
 } from './names.action';
 
 export const initialState: ReadonlyArray < Name > = [];
@@ -31,5 +31,19 @@ export const NamesReducer = createReducer(initialState,
     allNames
   }) => {
     return allNames;
+  }),
+  // on(saveNameSuccess, (state, {
+  //   response
+  // } => {
+  //   let newState = [...state]
+  //   newState.unshift(response)
+  //   return newState
+  // }))
+  on(saveNameSuccess, (state, {
+    response
+  }) => {
+    let newState = [...state]
+    newState.unshift(response)
+    return newState
   })
 )

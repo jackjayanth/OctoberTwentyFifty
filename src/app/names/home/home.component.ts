@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   names$ = this.store.select(getNames);
 
   ngOnInit(): void {
-    console.log(this.names$)
     this.store.dispatch(getNamesAPI())
   }
 

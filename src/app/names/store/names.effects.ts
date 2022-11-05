@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import {
   map,
-  switchMap
+  switchMap,
+  tap
 } from 'rxjs';
 import {
   NamesService
@@ -15,14 +17,16 @@ import {
 } from "@angular/core";
 import {
   getNamesAPI,
-  getNamesSuccess
+  getNamesSuccess,
+  saveNameSuccess,
+  saveNewName
 } from './names.action';
 
 
 @Injectable()
 export class NamesEffects {
 
-  constructor(private actions$: Actions, private namesService: NamesService) {}
+  constructor(private actions$: Actions, private namesService: NamesService, private route: Router) {}
 
   loadAllNames$ = createEffect(() =>
     this.actions$.pipe(
@@ -37,4 +41,19 @@ export class NamesEffects {
       })
     )
   );
+
+  saveName$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(saveNewName),
+      tap(() => this.route.navigate(['/names'])),
+      switchMap((action) => {
+        return this.namesService.postName(action.payload)
+          .pipe(
+            map((data) => saveNameSuccess({
+              response: data
+            }))
+          )
+      })
+    )
+  )
 }

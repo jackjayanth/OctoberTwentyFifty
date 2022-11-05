@@ -1,0 +1,8 @@
+<form>
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" name="nameYo" [(ngModel)]="nameYo" class="form-control" id="name" placeholder="Enter Name">
+    <h1>Your going to add: {{nameYo}}</h1>
+  </div>
+  <button (click)="save()">Save</button>
+</form>

@@ -12,4 +12,9 @@ export class NamesService {
   getNames(){
     return this.http.get<Name[]>("http://localhost:3000/names");
   }
+
+  postName(payload: Name){
+    return this.http.post<Name>("http://localhost:3000/names", payload);
+  }
+
 }
