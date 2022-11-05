@@ -5,8 +5,6 @@ export interface Book {
   cost: number;
 }
 
-
-// "id": 1,
-// "name": "Harry Potter and the Philosopher's Stone",
-// "author": "J. K. Rowling",
-// "cost": 300
+export interface BookState{
+  books: Book[];
+}
