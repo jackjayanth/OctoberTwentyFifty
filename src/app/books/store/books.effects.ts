@@ -1,4 +1,15 @@
-import { Router } from '@angular/router';
+import {
+  setAppState
+} from './../../shared/store/app.action';
+import {
+  Appstate
+} from './../../shared/store/appstate';
+import {
+  Store
+} from '@ngrx/store';
+import {
+  Router
+} from '@angular/router';
 import {
   BooksService
 } from './../books.service';
@@ -17,20 +28,29 @@ import {
   addNewBookSuccessAPI
 } from './books.action';
 import {
+  EMPTY,
   map,
   switchMap,
-  tap
+  tap,
+  withLatestFrom
 } from 'rxjs';
+import {
+  selectBooks
+} from './books.selector';
 
 @Injectable()
 export class BooksEffects {
 
-  constructor(private action$: Actions, private booksService: BooksService, private route: Router) {}
+  constructor(private action$: Actions, private booksService: BooksService, private route: Router, private appState: Store < Appstate > , private store: Store) {}
 
   loadAllBooks$ = createEffect(() =>
     this.action$.pipe(
       ofType(involeBooksAPI),
-      switchMap(() => {
+      withLatestFrom(this.store.select(selectBooks)),
+      switchMap(([, booksFromStore]) => {
+        if (booksFromStore.length > 0) {
+          return EMPTY;
+        }
         return this.booksService.get()
           .pipe(
             map((data) => booksFetchAPISuccess({
@@ -44,15 +64,27 @@ export class BooksEffects {
   saveBook$ = createEffect(() =>
     this.action$.pipe(
       ofType(addNewBookAPI),
-      tap(() => this.route.navigate(['/'])),
+      // tap(() => this.route.navigate(['/'])),
       switchMap((action) => {
+        this.appState.dispatch(setAppState({
+          apiStatus: {
+            apiStatus: '',
+            apiResponseMessage: ''
+          }
+        }));
         return this.booksService.create(action.payload)
           .pipe(
-            map((data) =>
-            addNewBookSuccessAPI({
-              response: data
+            map((data) => {
+              this.appState.dispatch(setAppState({
+                apiStatus: {
+                  apiStatus: '',
+                  apiResponseMessage: 'success'
+                }
+              }));
+              return addNewBookSuccessAPI({
+                response: data
+              })
             })
-            )
 
           )
       })
