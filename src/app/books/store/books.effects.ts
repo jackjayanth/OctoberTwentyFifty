@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {
   BooksService
 } from './../books.service';
@@ -11,29 +12,51 @@ import {
 } from '@ngrx/effects';
 import {
   involeBooksAPI,
-  booksFetchAPISuccess
+  booksFetchAPISuccess,
+  addNewBookAPI,
+  addNewBookSuccessAPI
 } from './books.action';
 import {
   map,
-  switchMap
+  switchMap,
+  tap
 } from 'rxjs';
 
 @Injectable()
 export class BooksEffects {
 
-  constructor(private action$: Actions, private booksService: BooksService) {}
+  constructor(private action$: Actions, private booksService: BooksService, private route: Router) {}
 
   loadAllBooks$ = createEffect(() =>
     this.action$.pipe(
       ofType(involeBooksAPI),
-      switchMap(()=>{
+      switchMap(() => {
         return this.booksService.get()
-        .pipe(
-          map((data)=> booksFetchAPISuccess({allBooks: data}))
-        )
+          .pipe(
+            map((data) => booksFetchAPISuccess({
+              allBooks: data
+            }))
+          )
       })
     )
   );
 
+  saveBook$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(addNewBookAPI),
+      tap(() => this.route.navigate(['/'])),
+      switchMap((action) => {
+        return this.booksService.create(action.payload)
+          .pipe(
+            map((data) =>
+            addNewBookSuccessAPI({
+              response: data
+            })
+            )
+
+          )
+      })
+    )
+  );
 
 }
