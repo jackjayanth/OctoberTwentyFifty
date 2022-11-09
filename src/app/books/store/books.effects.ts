@@ -25,7 +25,9 @@ import {
   involeBooksAPI,
   booksFetchAPISuccess,
   addNewBookAPI,
-  addNewBookSuccessAPI
+  addNewBookSuccessAPI,
+  invokeUpdateBookAPI,
+  updateBookAPISucess
 } from './books.action';
 import {
   EMPTY,
@@ -83,6 +85,36 @@ export class BooksEffects {
               }));
               return addNewBookSuccessAPI({
                 response: data
+              })
+            })
+
+          )
+      })
+    )
+  );
+
+  updateBook$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(invokeUpdateBookAPI),
+      // tap(() => this.route.navigate(['/'])),
+      switchMap((action) => {
+        this.appState.dispatch(setAppState({
+          apiStatus: {
+            apiStatus: '',
+            apiResponseMessage: ''
+          }
+        }));
+        return this.booksService.update(action.updateBook)
+          .pipe(
+            map((data) => {
+              this.appState.dispatch(setAppState({
+                apiStatus: {
+                  apiStatus: '',
+                  apiResponseMessage: 'success'
+                }
+              }));
+              return updateBookAPISucess({
+                updateBook: data
               })
             })
 
