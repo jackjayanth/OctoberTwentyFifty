@@ -24,10 +24,13 @@ export class BooksService {
   }
 
   update(payload: Book) {
-    return this.http.put < Book > (
+
+    let aa = this.http.put < Book > (
       `http://localhost:3000/books/${payload.id}`,
       payload
     );
+    console.log(JSON.stringify(aa))
+    return aa
   }
 
   delete(id: number) {

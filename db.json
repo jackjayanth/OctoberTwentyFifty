@@ -2,7 +2,7 @@
   "books": [
     {
       "id": 1,
-      "name": "Larry Potter and the Philosopher's Stone",
+      "name": "barry Potter and the Philosopher's Stone",
       "author": "J. K. Rowling",
       "cost": 300
     },
@@ -74,7 +74,7 @@
     },
     {
       "id": 13,
-      "name": "qwqwq",
+      "name": "m",
       "author": "wqwqw",
       "cost": 121212
     },
@@ -137,6 +137,12 @@
       "name": "Lauren is an asshole",
       "author": "Lauren Lockridge",
       "cost": 100000
+    },
+    {
+      "id": 24,
+      "name": "Lauren is",
+      "author": "asasdsd",
+      "cost": 1
     }
   ],
   "names": [

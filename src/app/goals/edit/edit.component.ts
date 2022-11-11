@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Goal } from '../store/goal';
 
 @Component({
   selector: 'app-edit',
@@ -12,4 +13,11 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goalForm: Goal = {
+    id: null!,
+    name: '',
+    status: ''
+  }
+
+  update(){}
 }

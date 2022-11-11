@@ -107,6 +107,7 @@ export class BooksEffects {
         return this.booksService.update(action.updateBook)
           .pipe(
             map((data) => {
+              console.log(data)
               this.appState.dispatch(setAppState({
                 apiStatus: {
                   apiStatus: '',

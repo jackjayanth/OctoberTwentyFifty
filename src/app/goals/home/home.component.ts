@@ -1,4 +1,8 @@
+import { Goal } from './../store/goal';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { getGoals } from '../store/goals.selector';
+import { getAllGoals } from '../store/goals.action';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  allGoals: any;
+  constructor( private store: Store) { }
 
   ngOnInit(): void {
+    this.allGoals = this.store.select(getGoals);
+    this.store.dispatch(getAllGoals())
   }
 
 }
