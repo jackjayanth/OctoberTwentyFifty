@@ -2,7 +2,7 @@ import { Goal } from './../store/goal';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { getGoals } from '../store/goals.selector';
-import { getAllGoals } from '../store/goals.action';
+import { getAllGoals, updateAGoal } from '../store/goals.action';
 
 @Component({
   selector: 'app-home',
@@ -18,4 +18,14 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(getAllGoals())
   }
 
+  update(idd:number, goall:Goal){
+    this.store.dispatch(updateAGoal({ id:idd,
+      payload: goall
+      // {
+      //     id: idd,
+      //     name: goall.name,
+      //     status: "Finished"
+      // }
+    }))
+  }
 }

@@ -10,8 +10,8 @@ export const getAllGoalsSuccess = createAction("[GOALS API] getting all goals su
 
 export const addANewGoal = createAction("[GOALS API] adding a new goal", props<{payload: Goal}>())
 
-export const addANewGoalSuccess = createAction("[GOALS API] adding a new goal success", props<{response: Goal[]}>())
+export const addANewGoalSuccess = createAction("[GOALS API] adding a new goal success", props<{response: Goal}>())
 
 export const updateAGoal = createAction("[GOALS API] updating a goal", props<{id: number, payload: Goal}>())
 
-export const updateAGoalSuccess = createAction("[GOALS API] updating a goal", props<{updateGoal: Goal}>())
+export const updateAGoalSuccess = createAction("[GOALS API] updating a goal success", props<{updateGoal: Goal[]}>())

@@ -10,6 +10,8 @@
 
   <div class="row">
     <h1>All Goals</h1>
-    <p *ngFor="let item of allGoals | async">{{item.id}} ==> {{item.name}}==> {{item.status}}</p>
+    <p *ngFor="let item of allGoals | async">{{item.id}} ==> {{item.name}}==> {{item.status}}
+      <button (click)="update(item.id, item)">Update</button>
+    </p>
   </div>
 </div>

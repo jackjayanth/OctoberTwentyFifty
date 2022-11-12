@@ -32,20 +32,29 @@ export class GoalsService {
       status: goal.status
     }
     let newState = [...this.initialState]
-    newState.push(newGoal);
+    newState.unshift(newGoal);
+    console.log("service alli added")
+    console.log(newState)
     this.initialState = newState;
-    return of(this.initialState);
+    return of(newGoal);
   }
 
   updateAGoal(id: number, goal:Goal){
-    // this.initialState = this.initialState.map((g) => {
-    //   if (g.id == goal.id){
-    //     return goal
-    //    }
-    //    return g
-    //  });
+    this.initialState = this.initialState.map((g) => {
+      if (g.id == goal.id){
+        // goal.id = 20
+        let gg = {
+          id: g.id,
+          name: goal.name,
+          status: "Finished"
+        }
+        return gg
+       }
+      //  g.id =30
+       return g
+     });
     // let updatingGoal = this.initialState.find((go)=> go.id == id);
-    // console.log(updatingGoal)
-    return of(goal);
+    console.log(this.initialState)
+    return of(this.initialState);
   }
 }

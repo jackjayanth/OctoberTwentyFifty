@@ -84,6 +84,7 @@ export class GoalsEffects {
   updateAGoals$ = createEffect(() =>
   this.action$.pipe(
     ofType(updateAGoal),
+    // tap(() => this.router.navigate(['/'])),
     switchMap((action) => {
       return this.goalsService.updateAGoal(action.id, action.payload)
         .pipe(

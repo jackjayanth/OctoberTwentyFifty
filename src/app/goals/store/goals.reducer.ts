@@ -32,14 +32,26 @@ export const GoalsReducer = createReducer(initialState,
   on(addANewGoalSuccess, (state, {
     response
   }) => {
-    return response;
+    // return response;
+
+    // let newState = [...state, response]
+    // console.log("reducer alli added")
+    // console.log(newState)
+    // newState.unshift(response)
+    // return newState
+
+    return [response]
   }),
   on(updateAGoalSuccess, (state, {
     updateGoal
   }) => {
-    let newState = state.filter((_) => _.id != updateGoal.id);
-    newState.unshift(updateGoal);
-    return newState;
-    // return state;
+    // let newState = state.filter((_) => _.id != updateGoal.id);
+    // newState.unshift(updateGoal);
+    // return newState;
+    console.log('state')
+    console.log(state)
+    console.log('updateGoal')
+    console.log(updateGoal)
+    return updateGoal;
   }),
 )
